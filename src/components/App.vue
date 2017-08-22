@@ -24,13 +24,13 @@
     import CalendarDay from "./CalendarDay.vue";
 
     export default {
-        data() {
-            return  {
-                month: 8,
-                year: 2017
-            };
-        },
         computed: {
+            month() {
+                return this.$store.state.currentMonth;
+            },
+            year() {
+                return this.$store.state.currentYear;
+            },
             days() {
 
                 //generate all days in the current month
