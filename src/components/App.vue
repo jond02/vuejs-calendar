@@ -1,9 +1,22 @@
 <template>
-    <div id="calendar">
-        <div v-for="week in weeks" class="calendar-week">
-            <calendar-day v-for="day in week" :day="day"></calendar-day>
+
+    <div>
+        <div id="day-bar">
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+            <div>Sun</div>
+        </div>
+        <div id="calendar">
+            <div v-for="week in weeks" class="calendar-week">
+                <calendar-day v-for="day in week" :day="day"></calendar-day>
+            </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -13,7 +26,7 @@
     export default {
         data() {
             return  {
-                month: 5,
+                month: 8,
                 year: 2017
             };
         },
