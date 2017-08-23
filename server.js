@@ -5,13 +5,27 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 const http = require('http');
+const serialize = require("serialize-javascript");
+const moment = require("moment-timezone");
+moment.tz.setDefault("UTC");
+
+let events = [
+    {description: "yooooo man", date: moment()}
+];
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(require("body-parser").json());
 
 app.get('/', (req, res) => {
   let template = fs.readFileSync(path.resolve('./index.html'), 'utf-8');
-  res.send(template);
+  let contentMarker = "<!--APP-->";
+  res.send(template.replace(contentMarker, `<script>var __INITIAL_STATE__ = ${serialize(events)}</script>`));
 
+});
+
+app.post("/add-event", (req, res) => {
+  events.push(req.body);
+  res.sendStatus(200);
 });
 
 const server = http.createServer(app);

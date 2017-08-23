@@ -39,10 +39,11 @@
             },
             create() {
                 if (this.description.trim().length > 0) {
-                    this.$store.commit("addEvent", this.description);
+                    this.$store.dispatch("addEvent", this.description).then(data => {
+                        this.description = "";
+                        this.close();
+                    });
                 }
-                this.description = "";
-                this.close();
             }
         },
         directives: {
