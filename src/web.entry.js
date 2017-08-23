@@ -26,5 +26,13 @@ new Vue({
   components: {
     App
   },
-  store
+  store,
+  render(createElement) {
+    //replaces div with id app in index.html
+    return createElement(
+        "div",
+        { attrs: {id: "app"} },
+        [createElement("app")]
+    );
+  }
 });
